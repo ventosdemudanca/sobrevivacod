@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2B2931" />
+    <meta name="description" content="SobrevivaCod: sua central pessoal para organizar os estudos de tecnologia e outras matérias." />
+    <title>SobrevivaCod — Central de Estudos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="question-bank.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegação principal">
+        <a class="brand" href="#inicio" aria-label="SobrevivaCod, início">
+          <span class="brand-mark" aria-hidden="true">✳</span>
+          <span class="brand-name">Sobreviva<span>Cod</span></span>
+        </a>
+
+        <div class="nav-label">MENU</div>
+        <nav class="main-nav">
+          <a class="nav-link active" href="#inicio" aria-current="page"><span class="nav-icon">⌂</span> Início</a>
+          <a class="nav-link" href="#materias"><span class="nav-icon">▦</span> Minhas matérias</a>
+          <a class="nav-link" href="#materias"><span class="nav-icon">◷</span> Revisão rápida</a>
+          <a class="nav-link" href="#practice"><span class="nav-icon">✎</span> Responder com minhas palavras</a>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="note-spark">✦</span>
+          <p>Um passo de cada vez.</p>
+          <span>Seu espaço de estudos, no seu ritmo.</span>
+        </div>
+        <div class="sidebar-footer"><span class="status-dot"></span> Seu espaço de estudos</div>
+      </aside>
+
+      <main id="inicio" class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>Meu espaço</span><span class="crumb-separator">/</span><strong>Início</strong></div>
+          <div class="topbar-right"><span class="today-label" id="today-label"></span><button class="settings-open" id="settings-open" type="button" aria-label="Abrir configurações" aria-haspopup="dialog">⚙</button><div class="avatar" aria-label="Perfil">E</div></div>
+        </header>
+
+        <section class="welcome-section study-corner" aria-labelledby="welcome-title">
+          <div class="study-corner-heading">
+            <span class="study-corner-mark" aria-hidden="true">✧</span>
+            <div><h1 id="welcome-title">Seu cantinho de estudos</h1><p>Organize suas ideias e aprenda no seu ritmo.</p></div>
+          </div>
+          <section class="study-corner-panel" data-notes-panel="inspiration" role="tabpanel">
+            <h2>O que quero estudar hoje?</h2>
+            <p>Anote tarefas, assuntos ou lembretes rápidos.</p>
+            <label class="visually-hidden" for="study-plan-input">Plano de estudos de hoje</label>
+            <textarea id="study-plan-input" rows="4" placeholder="• Revisar conceitos de redes&#10;• Praticar comandos no terminal&#10;• Estudar Python por 30 minutos"></textarea>
+            <div class="study-plan-footer"><span id="study-plan-status" aria-live="polite">Seu plano fica salvo neste navegador.</span><button type="button" id="save-study-plan">Salvar plano</button></div>
+          </section>
+          <div class="study-corner-tabs" role="tablist" aria-label="Seu cantinho de estudos">
+            <button type="button" class="study-corner-tab active" role="tab" aria-selected="true" data-notes-tab="inspiration"><span class="button-icon" aria-hidden="true">✎</span> Para hoje</button>
+            <button type="button" class="study-corner-tab" role="tab" aria-selected="false" data-notes-tab="notes"><span class="button-icon" aria-hidden="true">▤</span> Minhas notas</button>
+          </div>
+          <section class="study-corner-panel" data-notes-panel="notes" role="tabpanel" hidden>
+            <h2>Minhas anotações</h2><p>Guarde resumos e ideias separados por matéria.</p>
+            <form id="study-note-form" class="study-note-form">
+              <label for="study-note-subject">Matéria</label><select id="study-note-subject" required></select>
+              <label for="study-note-title">Título</label><input id="study-note-title" type="text" maxlength="80" placeholder="Ex.: Revisão de redes" required>
+              <label for="study-note-content">Anotação</label><textarea id="study-note-content" rows="4" placeholder="Escreva sua anotação..." required></textarea>
+              <button type="submit">Salvar anotação</button><span id="study-note-status" aria-live="polite"></span>
+            </form>
+            <div class="study-note-history"><h3>Histórico de notas</h3><p class="study-note-storage-hint">As anotações ficam salvas neste navegador.</p><div id="study-note-list" aria-live="polite"></div></div>
+          </section>
+
+        </section>
+
+        <section id="materias" class="subjects-section" aria-labelledby="subjects-title">
+          <div class="section-heading">
+            <div><div class="section-kicker">POR ONDE COMEÇAR</div><h2 id="subjects-title">Suas matérias</h2></div>
+            <label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar matéria..." aria-label="Buscar matéria" /><kbd>⌘ K</kbd></label>
+          </div>
+          <div id="subject-grid" class="subject-grid" aria-live="polite"></div>
+          <div id="empty-state" class="empty-state" hidden><span>⌕</span><p>Nenhuma matéria encontrada.</p><small>Tente buscar por outro nome.</small></div>
+        </section>
+
+        <section id="subject-view" class="subject-view" hidden aria-live="polite"></section>
+        <section class="coming-soon" aria-label="Novidades">
+          <div class="coming-icon">✎</div><div><strong>Seu plano de estudos está começando</strong><p>Em breve você poderá adicionar resumos, quizzes e questões em cada matéria.</p></div><span class="coming-badge">EM CONSTRUÇÃO</span>
+        </section>
+        <footer class="page-footer"><span>Feito para aprender com leveza.</span><span>SOBREVIVACOD <span class="footer-spark">✳</span></span></footer>
+      </main>
+    </div>
+
+    <dialog id="subject-dialog" class="subject-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" id="dialog-close" aria-label="Fechar">×</button>
+      <div class="dialog-icon" id="dialog-icon"></div>
+      <div class="dialog-kicker">MATÉRIA SELECIONADA</div>
+      <h2 id="dialog-title"></h2>
+      <p>Este espaço está sendo preparado. Em breve você poderá organizar aqui seus resumos, perguntas, quizzes e questões de prova.</p>
+      <button class="dialog-button" id="dialog-ok">Entendi</button>
+    </dialog>
+    <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
+      <button class="dialog-close" id="settings-close" type="button" aria-label="Fechar configurações">×</button>
+      <div class="dialog-kicker">PERSONALIZE SEU ESPAÇO</div><h2 id="settings-title">Configurações</h2>
+      <section class="settings-group" aria-labelledby="zoom-title"><div class="settings-group-heading"><h3 id="zoom-title">Zoom da página</h3><output id="zoom-value" for="zoom-control">100%</output></div>
+        <input id="zoom-control" type="range" min="80" max="120" step="5" value="100" aria-label="Zoom da página">
+        <div class="settings-range-labels"><span>80%</span><span>120%</span></div><button class="settings-reset" id="zoom-reset" type="button">Restaurar 100%</button>
+      </section>
+      <section class="settings-group" aria-labelledby="appearance-title"><h3 id="appearance-title">Aparência</h3><div class="appearance-options" role="group" aria-label="Escolha a aparência do site">
+        <button type="button" class="appearance-option" data-theme-choice="dark" aria-pressed="false"><span aria-hidden="true">☾</span> Escura roxa</button>
+        <button type="button" class="appearance-option" data-theme-choice="light" aria-pressed="false"><span aria-hidden="true">���</span> Clara</button>
+      </div></section>
+      <p class="settings-note">Suas preferências ficam salvas neste navegador.</p>
+    </dialog>
+  </body>
+</html>
